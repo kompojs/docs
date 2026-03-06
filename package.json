@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vitepress dev",
     "build": "vitepress build",
-    "preview": "vitepress preview",
-    "deploy": "bun run build && wrangler pages deploy .vitepress/dist --project-name=kompo-docs"
+    "preview": "vitepress preview"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +18,7 @@
   "devDependencies": {
     "@shikijs/vitepress-twoslash": "^4.0.1",
     "@types/bun": "latest",
-    "vitepress": "2.0.0-alpha.16",
-    "wrangler": "^4"
+    "vitepress": "2.0.0-alpha.16"
   },
   "peerDependencies": {
     "typescript": "^5"
