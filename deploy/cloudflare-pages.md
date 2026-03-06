@@ -36,14 +36,18 @@ bunx wrangler pages deploy .vitepress/dist --project-name=YOUR_PROJECT_NAME
 
 ## Option B: Deploy from Git (CI)
 
+With Git connected, **Cloudflare runs your build and then uploads the output itself**. Do **not** use `bun run deploy` as the build command — that runs Wrangler and needs an API token, which causes authentication errors in the build.
+
 1. In **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, connect this repo.
 2. Configure the build:
-   - **Framework preset:** None (or Vite if you prefer; build command and output dir override it)
-   - **Build command:** `bun run build` (or `bun install && bun run build` if you want install in the same step)
+   - **Framework preset:** None (or Vite)
+   - **Build command:** `bun run build` (or `bun install && bun run build`)
    - **Build output directory:** `.vitepress/dist`
    - **Root directory:** leave empty if the docs app is the repo root; set to `docs` (or the folder that contains `package.json`) if the repo is a monorepo.
 3. **Environment variables (optional):** add `BUN_VERSION` or use the default Bun in the Pages build image.
 4. Save; every push to the selected branch will trigger a deploy.
+
+**If you see "Authentication error [code: 10000]":** your build command is likely `bun run deploy`. Change it to `bun run build` and set the build output directory to `.vitepress/dist`. Cloudflare will deploy that folder automatically; no Wrangler or API token is used in the Git build.
 
 ## Build output
 

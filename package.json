@@ -20,7 +20,7 @@
     "@shikijs/vitepress-twoslash": "^4.0.1",
     "@types/bun": "latest",
     "vitepress": "2.0.0-alpha.16",
-    "wrangler": "^3"
+    "wrangler": "^4"
   },
   "peerDependencies": {
     "typescript": "^5"
