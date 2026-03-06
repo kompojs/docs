@@ -1,7 +1,6 @@
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import { defineConfig } from 'vitepress'
-import type { DefaultTheme } from 'vitepress'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
@@ -97,6 +96,7 @@ export default defineConfig({
   },
 
   themeConfig: {
+    // https://vitepress.dev/reference/default-theme-config
     logo: '/kompo_logo.webp',
     nav: [
       { text: 'Docs', link: '/docs/' },
@@ -169,6 +169,7 @@ export default defineConfig({
         items: [
           { text: 'Deploy Overview', link: '/deploy/overview' },
           { text: 'Platforms', link: '/deploy/platforms' },
+          { text: 'Cloudflare Pages', link: '/deploy/cloudflare-pages' },
           { text: 'Environment Variables', link: '/deploy/env-vars' },
           { text: 'Checklist', link: '/deploy/checklist' },
         ],
