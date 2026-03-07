@@ -11,22 +11,22 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /quick-start
+      link: /en/quick-start
     - theme: alt
       text: Introduction
-      link: /intro
+      link: /en/intro
 
 features:
   - title: 🧩 Code Orchestration Framework
     details: Pre-built Web3 capabilities (wallet, NFT, DAO) that you compose via CLI. No more reinventing the wheel.
-    link: /understand/architecture
+    link: /en/understand/architecture
   - title: 🏗️ Hexagonal Architecture
     details: Pure domain at the center, infrastructure as interchangeable adapters. Change providers without touching business logic.
-    link: /understand/ports-adapters
+    link: /en/understand/ports-adapters
   - title: 📦 Production Blueprints
     details: Ship complete dApps from templates—NFT Marketplace, DAO Governance, DeFi—with best practices built in.
-    link: /templates/overview
+    link: /en/templates/overview
   - title: 🧪 Fully Testable
     details: Your domains are 100% unit testable. No mocks, no blockchain required for testing.
-    link: /your-first-domain
+    link: /en/your-first-domain
 ---
