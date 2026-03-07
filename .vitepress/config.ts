@@ -9,7 +9,7 @@ import {
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: './content',
-  //base: '/docs/',
+  base: '/docs/',
   title: 'Kompo',
   description: 'Build Web3 apps faster and professionally with hexagonal architecture',
   ignoreDeadLinks: true,
