@@ -10,52 +10,224 @@ Blueprints are the DNA of Kompo's code generation. They define **what** to gener
 
 ## What is a Blueprint?
 
-A Blueprint is a JSON definition that describes a set of capabilities, domains, or an entire application. When you run `kompo add app` or `kompo add`, you are essentially executing a Blueprint.
+A Blueprint is a package that contains templates, starters, and dependency catalogs. When you run `kompo add app` or `kompo add adapter`, you are executing a Blueprint.
 
-Blueprints live in `packages/blueprints`.
+Blueprints are distributed as **npm packages** and resolved by the CLI at runtime.
 
-## Structure of a Blueprint
+## Blueprint Resolution Order
 
-A blueprint typically consists of:
+When the CLI needs a template or starter, it checks these sources in order:
 
-1.  **Metadata**: Name, version, description.
-2.  **Generators**: Instructions on which templates to render.
-3.  **Dependencies**: Packages to install.
-4.  **Prompts**: Questions to ask the user during generation.
+1. **Local** (`.kompo/templates/`) — your project-level overrides
+2. **Installed packages** (`@kompo/blueprints-nextjs`, etc.) — framework-specific
+3. **Core** (`@kompo/blueprints`) — built-in fallback
+
+This means you can override any template by placing it in `.kompo/templates/` in your project.
+
+## Official Blueprint Packages
+
+| Package | Type | What it provides |
+|:--|:--|:--|
+| `@kompo/blueprints` | Core | Adapters, drivers, features, starters for all frameworks |
+| `@kompo/blueprints-nextjs` | Framework | Next.js-specific elements and starters |
+| `@kompo/blueprints-react` | Framework | React (Vite) elements and starters |
+| `@kompo/blueprints-nuxt` | Framework | Nuxt-specific elements and starters |
+| `@kompo/blueprints-vue` | Framework | Vue-specific elements and starters |
+| `@kompo/blueprints-express` | Framework | Express elements and starters |
+
+Install a framework blueprint:
+
+```bash
+pnpm add -D @kompo/blueprints-nextjs
+```
+
+## Blueprint Package Manifest
+
+Every blueprint package has a `kompo.blueprint.json` at its root:
 
 ```json
 {
-  "name": "nextjs-fullstack",
-  "type": "app",
-  "generators": [
+  "$schema": "https://kompojs.dev/schemas/kompo.blueprint.json",
+  "kompo": "1.0",
+  "name": "@kompo/blueprints-nextjs",
+  "type": "framework",
+  "framework": "nextjs",
+  "paths": {
+    "elements": "elements/",
+    "starters": "starters/"
+  }
+}
+```
+
+**Fields:**
+
+- **type**: `"core"` or `"framework"`
+- **framework**: The framework ID (e.g. `nextjs`, `react`, `nuxt`)
+- **paths.elements**: Where template files live
+- **paths.starters**: Where starter definitions live
+
+## Blueprint Structure
+
+```
+@kompo/blueprints/
+  kompo.blueprint.json
+  elements/
+    apps/
+      nextjs/
+        framework/
+          files/          # .eta template files
+          catalog.json    # Dependencies for this blueprint
+        design-systems/
+          tailwind/
+          shadcn/
+    libs/
+      adapters/           # Adapter templates
+      drivers/            # Driver templates
+      kernel/             # Kernel templates
+  features/               # Feature definitions
+  starters/
+    nextjs/
+      tailwind/
+        blank/
+          starter.json    # Starter definition
+```
+
+## Starters
+
+A starter is a recipe that runs multiple CLI steps in sequence:
+
+```json
+{
+  "id": "nextjs.tailwind.blank",
+  "name": "Blank",
+  "description": "Default Next.js fullstack application with Tailwind CSS",
+  "steps": [
     {
-      "type": "scaffold",
-      "template": "apps/nextjs"
-    },
-    {
-      "type": "domain",
-      "name": "auth"
+      "command": "add",
+      "type": "app",
+      "name": "web",
+      "driver": "nextjs",
+      "designSystem": "tailwind"
     }
   ]
 }
 ```
 
-## Types of Blueprints
+List available starters:
 
-### 1. App Blueprints
-Used by `kompo add app`. These define the skeleton of a new application.
-*   Examples: `nextjs-fullstack`, `react-vite`, `web3-dapp`.
+```bash
+kompo list starters
+```
 
-### 2. Feature Blueprints
-Used by `kompo add`. These inject specific functionality into an existing project.
-*   Examples: `auth-privy`, `payment-stripe`, `orm-drizzle`.
+## Creating a Custom Blueprint Package
 
-## Creating a Blueprint
+### 1. Initialize the package
 
-To create a custom blueprint:
+```bash
+mkdir @acme/kompo-blueprints-sveltekit
+cd @acme/kompo-blueprints-sveltekit
+npm init -y
+```
 
-1.  **Define the Schema**: Create a JSON file in `packages/blueprints`.
-2.  **Create Templates**: Add `.eta` templates in `packages/cli/src/templates`.
-3.  **Register**: Available in your CLI.
+### 2. Add the manifest
 
-*(Detailed guide on creating custom blueprints coming soon)*
+Create `kompo.blueprint.json`:
+
+```json
+{
+  "$schema": "https://kompojs.dev/schemas/kompo.blueprint.json",
+  "kompo": "1.0",
+  "name": "@acme/kompo-blueprints-sveltekit",
+  "type": "framework",
+  "framework": "sveltekit",
+  "paths": {
+    "elements": "elements/",
+    "starters": "starters/"
+  }
+}
+```
+
+### 3. Create templates
+
+Add `.eta` template files under `elements/`:
+
+```
+elements/
+  apps/sveltekit/
+    framework/
+      files/
+        package.json.eta
+        src/
+          routes/
+            +page.svelte.eta
+      catalog.json
+```
+
+Template files use [Eta](https://eta.js.org/) syntax:
+
+```html
+<!-- +page.svelte.eta -->
+<script lang="ts">
+  // Generated by Kompo for <%= it.org %>
+</script>
+
+<main>
+  <h1>Welcome to <%= it.app %></h1>
+</main>
+```
+
+### 4. Create a starter
+
+```json
+{
+  "id": "sveltekit.tailwind.blank",
+  "name": "Blank SvelteKit + Tailwind",
+  "description": "Minimal SvelteKit application with Tailwind CSS",
+  "steps": [
+    {
+      "command": "add",
+      "type": "app",
+      "name": "web",
+      "driver": "sveltekit",
+      "designSystem": "tailwind"
+    }
+  ]
+}
+```
+
+### 5. Publish and use
+
+```bash
+npm publish
+```
+
+Users install with:
+
+```bash
+pnpm add -D @acme/kompo-blueprints-sveltekit
+kompo add app --template sveltekit.tailwind.blank
+```
+
+## Local Template Overrides
+
+Override any template in your project without publishing a package:
+
+```
+my-project/
+  .kompo/
+    templates/
+      apps/nextjs/
+        framework/
+          files/
+            src/app/layout.tsx.eta    # Your custom layout
+```
+
+Your override takes priority over installed packages.
+
+## Listing Installed Blueprints
+
+```bash
+kompo list blueprints
+```
+
+This shows all blueprint packages discovered in your project, their sources, and what they provide.

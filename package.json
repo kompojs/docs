@@ -17,17 +17,15 @@
   },
   "devDependencies": {
     "@shikijs/vitepress-twoslash": "^4.0.1",
-    "@types/bun": "latest",
+    "@types/node": "^20.10.0",
     "vitepress": "2.0.0-alpha.16"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
-  "packageManager": "bun@1.3.10",
+  "packageManager": "pnpm@10.28.1",
   "engines": {
-    "bun": ">=1.3.10"
-  },
-  "bun": {
-    "entry": "index.ts"
+    "node": ">=20.0.0",
+    "pnpm": ">=10.28.1"
   }
 }

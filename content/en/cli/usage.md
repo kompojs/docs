@@ -228,7 +228,7 @@ pnpm kompo add domain user-profiles
 **TypeScript errors after adding features**
 ```bash
 # Restart TypeScript server
-pnpm type-check
+pnpm typecheck
 
 # Clean and rebuild
 pnpm clean

@@ -1,52 +1,94 @@
 ---
 title: Quick Start
-description: Start building your Web3 application in 5 minutes with Kompo.
+description: Start building your application in 5 minutes with Kompo.
 ---
 
 ## Introduction
 
-Kompo is designed to be flexible: start fast with a **template** or build incrementally from scratch using the **CLI**.
+Kompo is designed to be flexible: **create a new project** from scratch or **add Kompo to an existing monorepo**.
 
-## 1. Add your app
-
-From the root of a Kompo monorepo, add a new application:
+## Option 1: Create a New Project
 
 ::: code-group
 
 ```bash [pnpm]
-kompo add app my-app
-cd apps/my-app   # or the path chosen by the CLI
+pnpm create kompo@latest my-app
 ```
 
-```bash [git clone]
-git clone https://github.com/kompojs/kompo.git my-monorepo
-cd my-monorepo
-pnpm install
-kompo add app my-app
-cd apps/my-app
+```bash [npm]
+npm create kompo@latest my-app
+```
+
+```bash [yarn]
+yarn create kompo my-app
+```
+
+```bash [bun]
+bun create kompo my-app
 ```
 
 :::
 
-## 2. Choose your Path
+The scaffolder will:
+1. Create a monorepo structure (`apps/`, `libs/`, `packages/`)
+2. Install `@kompo/core` and dependencies
+3. Run `kompo add app` interactively
 
-### Option A: Use a template (Recommended)
+### With a template
 
-Launch a complete, production-ready dApp with best practices built-in.
+Skip prompts by specifying a template:
 
 ```bash
-kompo add app my-marketplace --template nft-marketplace
+pnpm create kompo@latest my-app --template nextjs.tailwind.blank
 ```
 
-**What you get:**
-- Full React/Vite application
-- NFT Domain (Repository, Use Cases, Entities)
-- Pre-wired Adapters (Web3 + Local DB)
-- **Composition Root** handling the wiring
+## Option 2: Add to an Existing Monorepo
 
-### Option B: Build from Scratch
+Already have a Turborepo, Nx, or pnpm workspace? Install Kompo directly:
 
-**1. Add an empty app**
+::: code-group
+
+```bash [pnpm]
+pnpm add -D @kompo/core
+pnpm kompo init
+```
+
+```bash [npm]
+npm install -D @kompo/core
+npx kompo init
+```
+
+```bash [yarn]
+yarn add -D @kompo/core
+yarn kompo init
+```
+
+```bash [bun]
+bun add -d @kompo/core
+bunx kompo init
+```
+
+:::
+
+Then add your first application:
+
+```bash
+kompo add app
+```
+
+## Choose your Path
+
+### Use a Starter (Recommended)
+
+Launch a complete application with best practices built-in:
+
+```bash
+kompo add app --template nextjs.shadcn.blank
+```
+
+### Build from Scratch
+
+**1. Add an app**
 
 ```bash
 kompo add app my-app
@@ -70,16 +112,17 @@ kompo add adapter
 kompo wire nft
 ```
 
-## 3. Launch
+## Launch
 
 ```bash
 pnpm dev
 ```
 
-Visit `http://localhost:5173` to see your app in action!
+Visit `http://localhost:3000` to see your app in action!
 
 ## Next Steps
 
-- [Understand the Architecture](/understand/architecture)
-- [Master the CLI](/cli/overview)
-- [Explore Templates](/templates/overview)
+- [Understand the Architecture](/en/understand/architecture)
+- [Master the CLI](/en/cli/overview)
+- [Explore Templates](/en/templates/overview)
+- [Contributing](/en/contributing)

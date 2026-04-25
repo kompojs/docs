@@ -6,12 +6,12 @@ This project is set up to deploy the VitePress docs to [Cloudflare Pages](https:
 
 1. **Install dependencies** (includes Wrangler for CLI deploy):
    ```bash
-   bun install
+   pnpm install
    ```
 
 2. **Log in to Cloudflare** (for CLI deploy):
    ```bash
-   bunx wrangler login
+   pnpm dlx wrangler login
    ```
 
 3. **Create a Pages project** (if you don't have one yet):
@@ -22,7 +22,7 @@ This project is set up to deploy the VitePress docs to [Cloudflare Pages](https:
 Build and upload the static output:
 
 ```bash
-bun run deploy
+pnpm deploy
 ```
 
 This runs `vitepress build` then `wrangler pages deploy .vitepress/dist --project-name=kompo-docs`.
@@ -30,28 +30,28 @@ This runs `vitepress build` then `wrangler pages deploy .vitepress/dist --projec
 **Use a different project name:** set the name in `package.json` in the `deploy` script, or run manually:
 
 ```bash
-bun run build
-bunx wrangler pages deploy .vitepress/dist --project-name=YOUR_PROJECT_NAME
+pnpm build
+pnpm dlx wrangler pages deploy .vitepress/dist --project-name=YOUR_PROJECT_NAME
 ```
 
 ## Option B: Deploy from Git (CI)
 
-With Git connected, **Cloudflare runs your build and then uploads the output itself**. Do **not** use `bun run deploy` as the build command — that runs Wrangler and needs an API token, which causes authentication errors in the build.
+With Git connected, **Cloudflare runs your build and then uploads the output itself**. Do **not** use `pnpm deploy` as the build command — that runs Wrangler and needs an API token, which causes authentication errors in the build.
 
 1. In **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, connect this repo.
 2. Configure the build:
    - **Framework preset:** None (or Vite)
-   - **Build command:** `bun run build` (or `bun install && bun run build`)
+   - **Build command:** `pnpm build` (or `pnpm install && pnpm build`)
    - **Build output directory:** `.vitepress/dist`
    - **Root directory:** leave empty if the docs app is the repo root; set to `docs` (or the folder that contains `package.json`) if the repo is a monorepo.
-3. **Environment variables (optional):** add `BUN_VERSION` or use the default Bun in the Pages build image.
+3. **Environment variables (optional):** add `PNPM_VERSION` if you need a specific pnpm version in the Pages build image.
 4. Save; every push to the selected branch will trigger a deploy.
 
-**If you see "Authentication error [code: 10000]":** your build command is likely `bun run deploy`. Change it to `bun run build` and set the build output directory to `.vitepress/dist`. Cloudflare will deploy that folder automatically; no Wrangler or API token is used in the Git build.
+**If you see "Authentication error [code: 10000]":** your build command is likely `pnpm deploy`. Change it to `pnpm build` and set the build output directory to `.vitepress/dist`. Cloudflare will deploy that folder automatically; no Wrangler or API token is used in the Git build.
 
 ## Build output
 
-- **Build command:** `vitepress build` (via `bun run build`)
+- **Build command:** `vitepress build` (via `pnpm build`)
 - **Output directory:** `.vitepress/dist`
 
 Your site will be available at `https://<project-name>.pages.dev` (or your custom domain after you add it in the Pages project).

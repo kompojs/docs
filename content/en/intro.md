@@ -133,18 +133,19 @@ Proven hexagonal architecture used by major enterprises.
 
 ## Get Started Now
 
-- [**Quick Start**](/quick-start) — Create your first app in 5 minutes.
-- [**Understand**](/understand/architecture) — Hexagonal architecture and concepts.
-- [**Build**](/build/overview) — Complete Web3 application step by step.
-- [**CLI**](/cli/overview) — Master all Kompo commands.
+- [**Quick Start**](/en/quick-start) — Create your first app in 5 minutes.
+- [**Understand**](/en/understand/architecture) — Hexagonal architecture and concepts.
+- [**Blueprints**](/en/understand/blueprints) — How templates and starters work.
+- [**CLI**](/en/cli/overview) — Master all Kompo commands.
+- [**Contributing**](/en/contributing) — Help build Kompo.
 
 ## Join the Community
 
-- [Documentation](https://docs.kompo.dev)
-- [Discord](https://discord.gg/kompo)
-- [Twitter/X](https://twitter.com/kompo_js)
-- [GitHub](https://github.com/kompojs/kompo)
+- [Documentation](https://kompo.dev/docs)
+- [Discord](https://discord.gg/RcXGwnyEgZ)
+- [Twitter/X](https://x.com/kompojs)
+- [GitHub](https://github.com/kompojs)
 
 ---
 
-**Kompo** — Build Web3. Faster. Cleaner. Better.
+**Kompo** — Build apps. Faster. Cleaner. Better.

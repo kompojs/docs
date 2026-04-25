@@ -188,9 +188,28 @@ export default defineConfig({
         ],
       },
       {
+        text: 'Kompo AI',
+        collapsed: true,
+        items: [
+          { text: 'Overview', link: '/en/ai/overview' },
+          { text: 'Setup Guide', link: '/en/ai/setup' },
+          { text: 'IDE Integration', link: '/en/ai/ide-integration' },
+          { text: 'Workbench AI Tabs', link: '/en/ai/workbench' },
+          { text: 'Contributing', link: '/en/ai/contributing' },
+        ],
+      },
+      {
         text: 'Extensibility',
         collapsed: true,
         items: [{ text: 'Extensibility', link: '/en/extensibility' }],
+      },
+      {
+        text: 'Contributing',
+        collapsed: true,
+        items: [
+          { text: 'How to Contribute', link: '/en/contributing' },
+          { text: 'Local Development', link: '/en/local-development' },
+        ],
       },
     ],
     search: {
@@ -206,7 +225,7 @@ export default defineConfig({
       level: [2, 3],
     },
     editLink: {
-      pattern: 'https://github.com/kompo-dev/kompo/edit/main/packages/docs/:path',
+      pattern: 'https://github.com/kompojs/docs/edit/main/content/:path',
       text: 'Edit this page on GitHub',
     },
     footer: {
