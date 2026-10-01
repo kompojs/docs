@@ -1,15 +1,11 @@
-# yoyo
+# ⚠️ Kompo is no longer maintained
 
-To install dependencies:
+**Kompo has been discontinued and is no longer actively maintained.**
 
-```bash
-bun install
-```
+The repository is kept available for archival and reference purposes, but no new features, bug fixes, or support should be expected.
 
-To run:
+Thank you to everyone who contributed, tested, reported issues, or used Kompo.
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.3.10. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+**Status:** Archived  
+**Maintenance:** Discontinued  
+**Date:** October 2026
